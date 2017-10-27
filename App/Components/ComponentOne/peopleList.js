@@ -15,7 +15,7 @@ export default class ComponentOne extends Component{
   }
 
   render(){
-    console.log(this.props.people)
+    const { navigate } = this.props.navigation;
     if(this.props.people.length > 0){
       const peopleData = this.props.people.map((person, idx) => {
         return (
@@ -27,7 +27,7 @@ export default class ComponentOne extends Component{
         <View style={styles.container}>
           <FlatList
             data={peopleData}
-            renderItem={({item}) => <Button style={styles.item} title={item.key} color='#fff'/>}/>
+            renderItem={({item}) => <Button onPress={() => this.props.goToProfile(item.key)} style={styles.item} title={item.key} color='#fff' />}/>
         </View>
       )
     }

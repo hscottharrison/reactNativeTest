@@ -10,6 +10,8 @@ export default class ComponentOne extends Component{
     this.state = {
       people: []
     }
+
+    this.goToProfile = this.goToProfile.bind(this);
   }
 
   componentWillMount(){
@@ -19,6 +21,11 @@ export default class ComponentOne extends Component{
     })
   }
 
+  goToProfile(character){
+    const {navigate} = this.props.navigation
+    navigate('Profile', { name: character })
+  }
+
   render(){
     return (
       <View style={styles.container}>
@@ -26,6 +33,8 @@ export default class ComponentOne extends Component{
           <Text style={styles.logo}>SWAPI Lookup</Text>
         </View>
         <PeopleList
+          goToProfile={this.goToProfile}
+          navigation={this.props.navigation}
           style={styles.peopleList}
           people={this.state.people}/>
       </View>
