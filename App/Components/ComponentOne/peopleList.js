@@ -19,15 +19,17 @@ export default class ComponentOne extends Component{
     if(this.props.people.length > 0){
       const peopleData = this.props.people.map((person, idx) => {
         return (
-          {key: person.name}
+          {
+            key: person.name,
+            id: idx + 1
+          }
         )
       })
-      console.log(peopleData)
       return(
         <View style={styles.container}>
           <FlatList
             data={peopleData}
-            renderItem={({item}) => <Button onPress={() => this.props.goToProfile(item.key)} style={styles.item} title={item.key} color='#fff' />}/>
+            renderItem={({item}) => <Button onPress={() => this.props.goToProfile(item.id)} style={styles.item} title={item.key} color='#fff' />}/>
         </View>
       )
     }

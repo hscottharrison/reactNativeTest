@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {AppRegistry, Text, View, TextInput, Button, StyleSheet} from 'react-native';
+import * as Actions from '../../actions/profileActions';
+
 import PeopleList from './peopleList';
+import Header from '../header';
 
 
 export default class ComponentOne extends Component{
@@ -23,15 +26,18 @@ export default class ComponentOne extends Component{
 
   goToProfile(character){
     const {navigate} = this.props.navigation
-    navigate('Profile', { name: character })
+    Actions.getPerson(character).then(response => response.json())
+    .then(response => {
+      navigate('Profile', {character: response})
+    })
   }
 
   render(){
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.logo}>SWAPI Lookup</Text>
-        </View>
+
+        <Header />
+
         <PeopleList
           goToProfile={this.goToProfile}
           navigation={this.props.navigation}
